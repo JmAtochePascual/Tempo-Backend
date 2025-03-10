@@ -4,6 +4,8 @@ import morgan from "morgan";
 import connectDB from "./data/database";
 import cookieParser from "cookie-parser";
 import userRouter from "./routers/userRouter";
+import swaggerSpec from "./config/swagger";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 
@@ -35,5 +37,8 @@ app.use(morgan("dev"));
 
 // Routers
 app.use("/api/auth", userRouter);
+
+// Route for the API documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 export default app;
