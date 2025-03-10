@@ -85,3 +85,43 @@ export const authLogout = (req: Request, res: Response) => {
   });
   res.sendStatus(200);
 };
+
+// Verify the token 
+export const authRequired = async (req: Request, res: Response, next: NextFunction) => {
+  const { tempoToken } = req.cookies;
+
+  // Check if the token is provided
+  if (!tempoToken) {
+    res.status(401).json({ message: 'No token provided' });
+    return;
+  }
+
+  try {
+    const decoded = jwt.verify(tempoToken, process.env.JWT_SECRET!) as { id: Id };
+
+    req.id = decoded.id;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid token' });
+  }
+};
+
+// Get current user
+export const authProfile = async (req: Request, res: Response) => {
+  const { id } = req;
+
+  try {
+    // Get the user by ID
+    const user = await User.findById(id).select('name email');
+
+    // Check if the user exists
+    if (!user) {
+      res.status(401).json({ message: 'User not found' });
+      return;
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error getting current user" });
+  }
+};

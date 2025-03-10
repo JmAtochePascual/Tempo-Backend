@@ -1,6 +1,6 @@
 import Router from "express";
 import { validateLogin, validateRegister } from "../middlewares/authMiddleware";
-import { authRegister, authLogin, authLogout } from "../controllers/authController";
+import { authRegister, authLogin, authLogout, authProfile, authRequired } from "../controllers/authController";
 
 // Create the router
 const router = Router();
@@ -13,5 +13,8 @@ router.post("/login", validateLogin, authLogin);
 
 // Router to logout a user
 router.post("/logout", authLogout);
+
+// Router to get current user
+router.get("/profile", authRequired, authProfile);
 
 export default router;
