@@ -74,3 +74,14 @@ export const authLogin = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error logging in" });
   }
 };
+
+// Logout a user
+export const authLogout = (req: Request, res: Response) => {
+  res.cookie("tempoToken", "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 0 // exipere immediately
+  });
+  res.sendStatus(200);
+};
