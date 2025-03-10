@@ -3,6 +3,7 @@ import cors, { CorsOptions } from "cors";
 import morgan from "morgan";
 import connectDB from "./data/database";
 import cookieParser from "cookie-parser";
+import userRouter from "./routers/userRouter";
 
 const app = express();
 
@@ -31,5 +32,8 @@ app.use(cors(corsOptions));
 
 // Enable morgan
 app.use(morgan("dev"));
+
+// Routers
+app.use("/api/auth", userRouter);
 
 export default app;
