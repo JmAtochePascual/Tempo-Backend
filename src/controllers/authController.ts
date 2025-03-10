@@ -38,3 +38,39 @@ export const authRegister = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error creating user" });
   }
 };
+
+// Login a user
+export const authLogin = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if the user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(400).json({ message: "User not found" });
+      return
+    }
+
+    // Check the password 
+    const isMatch = await comparePassword(password, user.password);
+    if (!isMatch) {
+      res.status(401).json({ message: 'Incorrect password' })
+      return;
+    }
+
+    // Generate the JWT
+    const token = generateJWT(user._id);
+
+    // Config cookie
+    res.cookie("tempoToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000 // exipere in 7 days
+    });
+
+    res.status(200).json({ message: 'Logged in successfully' });
+  } catch (error) {
+    res.status(500).json({ message: "Error logging in" });
+  }
+};

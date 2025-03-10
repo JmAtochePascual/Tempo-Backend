@@ -32,3 +32,22 @@ export const validateRegister = [
     next();
   },
 ];
+
+// Middleware to validate login an user
+export const validateLogin = [
+  check('email')
+    .notEmpty().withMessage('The email is required')
+    .isEmail().withMessage('The email must be valid'),
+
+  check('password')
+    .notEmpty().withMessage('The password is required'),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ errors: errors.array() });
+      return;
+    }
+    next();
+  },
+];
