@@ -92,8 +92,13 @@ Antes de ejecutar el proyecto, asegúrese de tener instalado:
 ### 1. Clonar el repositorio
 
 ```bash
+<<<<<<< HEAD
 git clone https://github.com/JmAtochePascual/Tempo-Backend.git
 cd Tempo-Backend
+=======
+git clone https://github.com/TU_USUARIO/TU_REPOSITORIO.git
+cd TU_REPOSITORIO
+>>>>>>> e17948d3e3a0f02c9d725eece468637e9c3283f2
 ```
 
 ### 2. Instalar dependencias
@@ -107,12 +112,18 @@ npm install
 Cree un archivo `.env` en la raíz del proyecto y defina las siguientes variables:
 
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> e17948d3e3a0f02c9d725eece468637e9c3283f2
 MONGO_URI=mongodb://localhost:27017/Tempo
 FRONTEND_URL=http://localhost:5173
 JWT_SECRET=palabraultramegasecreta
 PORT=4000
+<<<<<<< HEAD
 
+=======
+>>>>>>> e17948d3e3a0f02c9d725eece468637e9c3283f2
 ```
 
 ### 4. Iniciar el servidor en desarrollo
@@ -138,7 +149,11 @@ Si deseas contribuir al proyecto, sigue estos pasos:
 1. Haz un Fork del repositorio:
 
    ```bash
+<<<<<<< HEAD
    git remote add upstream https://github.com/JmAtochePascual/Tempo-Backend.git
+=======
+   git remote add upstream https://github.com/JMatochePascual/Administrador-de-Productos-Backend.git
+>>>>>>> e17948d3e3a0f02c9d725eece468637e9c3283f2
    ```
 
 2. Crea una nueva rama:
