@@ -18,7 +18,7 @@ describe('POST /api/auth/register', () => {
   it('Debe mostrar un error si no se pasa el nombre del usuario', async () => {
     const response = await request(app).post('/api/auth/register').send({
       name: "",
-      email: "user@123",
+      email: "user@123.com",
       password: "password",
       confirmPassword: "password"
     })
@@ -50,7 +50,7 @@ describe('POST /api/auth/register', () => {
   it('Debe mostrar un error si no se pasa el password del usuario', async () => {
     const response = await request(app).post('/api/auth/register').send({
       name: "Test",
-      email: "user@123",
+      email: "user@123.com",
       password: "",
       confirmPassword: "password"
     })
@@ -66,7 +66,7 @@ describe('POST /api/auth/register', () => {
   it('Debe mostrar un error si no se pasa el confirm password del usuario', async () => {
     const response = await request(app).post('/api/auth/register').send({
       name: "Test",
-      email: "user@123",
+      email: "user@123.com",
       password: "password",
       confirmPassword: ""
     })
